@@ -1,4 +1,4 @@
-package ru.anarchyghost.sender.infrastructure
+package ru.anarchyghost.basketball.sender.infrastructure
 
 /**
  * Listener of events
