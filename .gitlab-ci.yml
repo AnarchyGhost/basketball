@@ -40,4 +40,4 @@ deployDocs:
     - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
     - mkdir -p ~/.ssh
     - chmod 700 ~/.ssh
-  script: echo ls -a
+  script: ls -a
