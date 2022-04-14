@@ -1,18 +1,12 @@
-image: gradle:7.4.2-jdk11-alpine
-
 variables:
   GRADLE_OPTS: "-Dorg.gradle.daemon=false"
 
 before_script:
   - GRADLE_USER_HOME="$(pwd)/.gradle"
   - export GRADLE_USER_HOME
-  - 'command -v ssh-agent >/dev/null || ( apt-get update -y && apt-get install openssh-client -y )'
-  - eval $(ssh-agent -s)
-  - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
-  - mkdir -p ~/.ssh
-  - chmod 700 ~/.ssh
 
 build:
+  image: gradle:7.4.2-jdk11-alpine
   stage: build
   script: gradle --build-cache assemble
   cache:
@@ -26,6 +20,7 @@ build:
       - build/dokka/htmlCollector
 
 buildDocs:
+  image: gradle:7.4.2-jdk11-alpine
   stage: build
   script: gradle dokkaHtmlCollector
   cache:
@@ -34,3 +29,15 @@ buildDocs:
     paths:
       - build
       - .gradle
+
+
+deployDocs:
+  image: ubuntu
+  stage: deploy
+  before_script:
+    - 'command -v ssh-agent >/dev/null || ( apt-get update -y && apt-get install openssh-client -y )'
+    - eval $(ssh-agent -s)
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+  script: echo ls -a
