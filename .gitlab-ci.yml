@@ -40,4 +40,6 @@ deployDocs:
     - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
     - mkdir -p ~/.ssh
     - chmod 700 ~/.ssh
-  script: scp -r build/dokka/htmlCollector/* "$USER"@"$HOST":/var/www/basketball.anarchyghost.com/html/javadoc
+    - ssh-keyscan $HOST >> ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
+  script: scp -r build/dokka/htmlCollector/* $USER@$HOST:/var/www/basketball.anarchyghost.com/html/javadoc
