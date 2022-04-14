@@ -15,9 +15,7 @@ build:
     paths:
       - build
       - .gradle
-  artifacts:
-    paths:
-      - build/dokka/htmlCollector
+  when: manual
 
 buildDocs:
   image: gradle:7.4.2-jdk11-alpine
@@ -29,7 +27,9 @@ buildDocs:
     paths:
       - build
       - .gradle
-
+  artifacts:
+    paths:
+      - build/dokka/htmlCollector
 
 deployDocs:
   image: ubuntu
