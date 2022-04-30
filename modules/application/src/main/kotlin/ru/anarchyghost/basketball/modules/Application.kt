@@ -1,4 +1,4 @@
-package ru.anarchyghost.basketball
+package ru.anarchyghost.basketball.modules
 
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication

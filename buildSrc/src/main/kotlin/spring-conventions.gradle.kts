@@ -14,6 +14,7 @@ dependencies {
     kapt("org.springframework.boot:spring-boot-configuration-processor")
     implementation("org.springframework.boot:spring-boot-configuration-processor")
     implementation("org.springframework.boot:spring-boot-starter-security")
+    implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client:3.1.2")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
 
     // Validation

@@ -1,3 +1,3 @@
 subprojects {
-    group = "ru.energochain.platform.sending"
+    group = "ru.energochain.platform.modules.sending"
 }
