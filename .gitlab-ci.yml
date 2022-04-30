@@ -29,6 +29,8 @@ buildDocs:
   artifacts:
     paths:
       - build/dokka/htmlCollector
+  only:
+    - master
 
 deployDocs:
   image: ubuntu
@@ -42,3 +44,5 @@ deployDocs:
     - ssh-keyscan $HOST >> ~/.ssh/known_hosts
     - chmod 644 ~/.ssh/known_hosts
   script: scp -r build/dokka/htmlCollector/* $USER@$HOST:/var/www/basketball.anarchyghost.com/html/javadoc
+  only:
+    - master
