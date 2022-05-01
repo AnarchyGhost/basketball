@@ -1,6 +1,6 @@
 # Application-wide properties
 server:
-  port: 8002
+  port: 0
 
 # Configuring Eureka client, at this moment it's necessary to show where Eureka is located
 eureka:
@@ -14,4 +14,10 @@ spring:
   # Set the name of application
   application:
     name: sending
-
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: config
+      # Stop the application if can't connect to config service
+      fail-fast: true

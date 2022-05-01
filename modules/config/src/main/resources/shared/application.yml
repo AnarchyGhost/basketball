@@ -1,0 +1,7 @@
+app:
+  kafka:
+    server: http://localhost:9092
+    topics:
+      sending:
+        sendCode: sending_send_code
+        codeSent: sending_code_sent

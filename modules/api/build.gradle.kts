@@ -12,6 +12,8 @@ tasks.jar { enabled = true }
 
 dependencies {
     implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client:3.1.2")
+    implementation("org.springframework.cloud:spring-cloud-config-client:3.1.2")
+    implementation("org.springframework.cloud:spring-cloud-starter-bootstrap:3.1.2")
     implementation("org.springframework.cloud:spring-cloud-starter-stream-kafka:3.2.2")
     implementation("org.springframework.boot:spring-boot-starter:2.6.7")
     implementation("org.jetbrains.kotlin:kotlin-reflect")

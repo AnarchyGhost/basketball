@@ -1,5 +1,17 @@
 server:
-  port: 8001
+  port: 0
+
+spring:
+  # Set the name of application
+  application:
+    name: api
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: config
+      # Stop the application if can't connect to config service
+      fail-fast: true
 # Configuring Eureka client, at this moment it's necessary to show where Eureka is located
 eureka:
   client:
