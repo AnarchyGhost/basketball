@@ -30,7 +30,7 @@ buildDocs:
     paths:
       - build/dokka/htmlCollector
   only:
-    - master
+    - main
 
 deployDocs:
   image: ubuntu
@@ -45,4 +45,5 @@ deployDocs:
     - chmod 644 ~/.ssh/known_hosts
   script: scp -r build/dokka/htmlCollector/* $USER@$HOST:/var/www/basketball.anarchyghost.com/html/javadoc
   only:
-    - master
+    - main
+
