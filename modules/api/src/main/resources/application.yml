@@ -1,0 +1,9 @@
+server:
+  port: 8001
+# Configuring Eureka client, at this moment it's necessary to show where Eureka is located
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://user:bestpasswordever@localhost:8000/eureka
