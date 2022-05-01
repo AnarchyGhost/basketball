@@ -1,24 +1,21 @@
 # Application-wide properties
 server:
-  port: 8011
+  port: 8001
 
 spring:
   # Set the name of application
   application:
-    name: cloud-config-server
+    name: config
 
-  # At this time, I'm going to store configurations in a classpath
+  profiles:
+    active: native
   # Let's look for configurations in a classpath
   cloud:
     config:
       server:
         native:
           search-locations:
-            - classpath:/
-  config:
-    activate:
-      on-profile:
-        native
+            - classpath:/shared
 
 # Configuring Eureka client, at this moment it's necessary to show where Eureka is located
 eureka:

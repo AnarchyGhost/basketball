@@ -9,14 +9,14 @@ import ru.anarchyghost.basketball.modules.sending.interactions.events.SendAuthCo
 @Component
 internal class KafkaConsumerResource {
 
-    @KafkaListener(topics = ["sending_send_code"], groupId = "sending")
+    @KafkaListener(topics = ["\${app.kafka.topics.sending.sendCode}"], groupId = "sending")
     fun addDocument(
         @Payload doc: SendAuthCodeEvent,
     ) {
         println(doc.to+"3")
     }
 
-    @KafkaListener(topics = ["sending_code_sent"], groupId = "sending")
+    @KafkaListener(topics = ["\${app.kafka.topics.sending.codeSent}"], groupId = "sending")
     fun addDoc(
         @Payload doc: AuthCodeSentEvent,
     ) {

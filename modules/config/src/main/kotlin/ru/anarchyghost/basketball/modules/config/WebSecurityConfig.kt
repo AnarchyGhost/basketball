@@ -1,4 +1,4 @@
-package ru.anarchyghost.basketball.modules
+package ru.anarchyghost.basketball.modules.config
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
