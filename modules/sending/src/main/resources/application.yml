@@ -2,11 +2,6 @@
 server:
   port: 8002
 
-spring:
-  # Set the name of application
-  application:
-    name: sending
-
 # Configuring Eureka client, at this moment it's necessary to show where Eureka is located
 eureka:
   client:
@@ -14,3 +9,9 @@ eureka:
     fetchRegistry: true
     serviceUrl:
       defaultZone: http://user:bestpasswordever@localhost:8000/eureka
+
+spring:
+  # Set the name of application
+  application:
+    name: sending
+
