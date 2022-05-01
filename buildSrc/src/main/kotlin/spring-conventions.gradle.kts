@@ -8,15 +8,13 @@ plugins {
     id("io.spring.dependency-management")
 }
 
-val mapstructVersion = "1.4.2.Final"
-
 dependencies {
     kapt("org.springframework.boot:spring-boot-configuration-processor")
     implementation("org.springframework.boot:spring-boot-configuration-processor")
     implementation("org.springframework.boot:spring-boot-starter-security")
-    implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client:3.1.2")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
-
+    implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation(platform("org.springframework.cloud:spring-cloud-dependencies:2021.0.2"))
     // Validation
     implementation("javax.validation:validation-api")
 

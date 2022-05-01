@@ -7,7 +7,6 @@ plugins {
     `java-test-fixtures`
     kotlin("jvm")
     kotlin("kapt")
-
 }
 
 dependencies {

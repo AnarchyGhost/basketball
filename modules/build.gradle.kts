@@ -1,3 +1,3 @@
 subprojects {
-    group = "ru.energochain.platform.modules"
+    group = "ru.energochain.basketball.modules"
 }

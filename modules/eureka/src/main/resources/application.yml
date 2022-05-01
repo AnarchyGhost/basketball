@@ -1,0 +1,19 @@
+# Application-wide configuration
+server:
+  port: 8000
+
+spring:
+  application:
+    name: Eureka Server
+  security:
+    user:
+      name: user
+      password: bestpasswordever
+eureka:
+  client:
+    fetch-registry: false
+    register-with-eureka: false
+  instance:
+    # Name of current host, in this particular case it's better
+    # to set it manually
+    hostname: localhost
