@@ -13,9 +13,6 @@ internal class EventListener(
     @KafkaListener(topics = ["\${app.kafka.topics.auth.codeRequested}"], groupId = "auth")
     fun addDocument(
         @Payload event: AuthCodeRequestedEvent,
-    ) {
-        println("QQ")
-        createAuthenticationCodeUseCase.execute(event.username)
-    }
+    ) = createAuthenticationCodeUseCase.execute(event.username)
 
 }

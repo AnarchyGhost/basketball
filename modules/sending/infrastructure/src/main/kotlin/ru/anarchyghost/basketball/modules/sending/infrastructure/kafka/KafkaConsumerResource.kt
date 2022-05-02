@@ -3,23 +3,17 @@ package ru.anarchyghost.basketball.modules.sending.infrastructure.kafka
 import org.springframework.kafka.annotation.KafkaListener
 import org.springframework.messaging.handler.annotation.Payload
 import org.springframework.stereotype.Component
-import ru.anarchyghost.basketball.modules.sending.interactions.events.AuthCodeSentEvent
-import ru.anarchyghost.basketball.modules.sending.interactions.events.SendAuthCodeEvent
+import ru.anarchyghost.basketball.modules.auth.interactions.events.AuthCodeCreatedEvent
+import ru.anarchyghost.basketball.modules.sending.interactions.usecases.SendAuthCodeUseCase
 
 @Component
-internal class KafkaConsumerResource {
-
-    @KafkaListener(topics = ["\${app.kafka.topics.sending.sendCode}"], groupId = "sending")
+internal class KafkaConsumerResource(
+    private val sendAuthCodeUseCase: SendAuthCodeUseCase
+) {
+    @KafkaListener(topics = ["\${app.kafka.topics.auth.codeCreated}"], groupId = "sending")
     fun addDocument(
-        @Payload doc: SendAuthCodeEvent,
+        @Payload event: AuthCodeCreatedEvent,
     ) {
-        println(doc.to+"3")
-    }
-
-    @KafkaListener(topics = ["\${app.kafka.topics.sending.codeSent}"], groupId = "sending")
-    fun addDoc(
-        @Payload doc: AuthCodeSentEvent,
-    ) {
-        println(doc.to+"3")
+        sendAuthCodeUseCase.execute(to = event.username, code = event.code)
     }
 }

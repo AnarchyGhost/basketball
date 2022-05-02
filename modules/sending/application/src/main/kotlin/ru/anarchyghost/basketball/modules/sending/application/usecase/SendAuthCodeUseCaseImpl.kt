@@ -1,8 +1,7 @@
 package ru.anarchyghost.basketball.modules.sending.application.usecase
 
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.RequestParam
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.stereotype.Service
+import ru.anarchyghost.basketball.modules.sending.application.data.AuthCodeMessageData
 import ru.anarchyghost.basketball.modules.sending.application.service.SendingService
 import ru.anarchyghost.basketball.modules.sending.interactions.usecases.SendAuthCodeUseCase
 
@@ -11,7 +10,7 @@ import ru.anarchyghost.basketball.modules.sending.interactions.usecases.SendAuth
  * @param sendingService service that sends messages
  * @author anarchyghost
  */
-@RestController
+@Service
 class SendAuthCodeUseCaseImpl(
     private val sendingService: SendingService
 ) : SendAuthCodeUseCase {
@@ -22,11 +21,16 @@ class SendAuthCodeUseCaseImpl(
      * @author anarchyghost
      */
 
-    @GetMapping("/sendAuthCode")
     override fun execute(
-        @RequestParam to: String,
-        @RequestParam code: String
+        to: String,
+        code: String
     ) {
-        println("AAAA")
+        sendingService.send(
+            to = to,
+            template = "auth/code",
+            AuthCodeMessageData(
+                code = code
+            )
+        )
     }
 }

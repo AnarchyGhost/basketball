@@ -8,14 +8,12 @@ import org.springframework.kafka.annotation.EnableKafka
 import ru.anarchyghost.basketball.modules.auth.interactions.AuthenticateByCodeUseCase
 import ru.anarchyghost.basketball.modules.auth.interactions.GetAuthUseCase
 import ru.anarchyghost.basketball.modules.auth.interactions.GetUsersUseCase
-import ru.anarchyghost.basketball.modules.sending.interactions.usecases.SendAuthCodeUseCase
 
 @EnableDiscoveryClient
 
 @SpringBootApplication
 @EnableKafka
 @EnableFeignClients(basePackageClasses = [
-    SendAuthCodeUseCase::class,
     GetUsersUseCase::class,
     AuthenticateByCodeUseCase::class,
     GetAuthUseCase::class

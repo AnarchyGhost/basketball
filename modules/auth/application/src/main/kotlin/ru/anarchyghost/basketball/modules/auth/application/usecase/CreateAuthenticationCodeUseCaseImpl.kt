@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service
 import ru.anarchyghost.basketball.modules.auth.Code
 import ru.anarchyghost.basketball.modules.auth.CodeGenerator
 import ru.anarchyghost.basketball.modules.auth.application.CodeExpirationSpecification
+import ru.anarchyghost.basketball.modules.auth.application.EventPublisher
 import ru.anarchyghost.basketball.modules.auth.application.repository.CodeRepository
 import ru.anarchyghost.basketball.modules.auth.interactions.CreateAuthenticationCodeUseCase
 
@@ -11,6 +12,7 @@ import ru.anarchyghost.basketball.modules.auth.interactions.CreateAuthentication
 class CreateAuthenticationCodeUseCaseImpl(
     private val codeRepository: CodeRepository,
     private val codeGenerator: CodeGenerator,
+    private val eventPublisher: EventPublisher
 ) : CreateAuthenticationCodeUseCase {
 
     companion object {
@@ -19,7 +21,7 @@ class CreateAuthenticationCodeUseCaseImpl(
     }
 
     override fun execute(username: String) {
-        require(PhoneRegex.matches(username)){
+        require(PhoneRegex.matches(username)) {
             "Provided username is not a valid Phone number"
         }
         val code = codeRepository.findByUsername(username)
@@ -29,8 +31,6 @@ class CreateAuthenticationCodeUseCaseImpl(
             code.renew(codeGenerator)
         }
         codeRepository.save(code)
-        //TODO: remove print
-        println(code.value)
-        //eventPublisher.publish(AuthenticationCodeCreated(username, code.value))
+        eventPublisher.publishAuthCodeCreated(username = username, code = code.value)
     }
 }
