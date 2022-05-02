@@ -1,0 +1,56 @@
+extend type Mutation {
+    createPlace(
+        latitude: Float!
+        longitude: Float!
+        name: String!
+        description: String
+        address: String
+        sports: [SportKind!]!
+    ): Place!
+
+    updatePlace(
+        id: String!
+        name: String!
+        description: String
+        sports: [SportKind!]!
+    ): Place
+
+    removePlace(
+        id: String!
+    ): String
+}
+
+type Query {
+    places: [Place]
+    place(
+        id: String!
+    ): Place
+}
+
+type Place {
+    id: String!
+    latitude: Float!
+    longitude: Float!
+    name: String!
+    description: String
+    address: String
+    status: PlaceStatus
+    kind: PlaceKind
+    sports: [SportKind!]!
+    createdBy: String
+    approvedBy: String
+    createdAt: String
+    updatedAt: String
+}
+
+enum PlaceStatus {
+    UNAPPROVED, APPROVED, REMOVED
+}
+
+enum PlaceKind {
+    OPEN, CLOSED, NOT_WORKS
+}
+
+enum SportKind {
+    BASKETBALL
+}
