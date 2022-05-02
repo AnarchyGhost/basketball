@@ -21,7 +21,9 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     runtimeOnly("org.glassfish.jaxb:jaxb-runtime:4.0.0-M4")
     implementation("org.springframework.cloud:spring-cloud-starter-openfeign:3.1.2")
+
     implementation(project(":modules:sending:interactions"))
+    implementation(project(":modules:auth:interactions"))
 }
 repositories {
     mavenCentral()
