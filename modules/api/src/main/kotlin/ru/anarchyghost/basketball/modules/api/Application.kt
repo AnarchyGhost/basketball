@@ -8,16 +8,24 @@ import org.springframework.kafka.annotation.EnableKafka
 import ru.anarchyghost.basketball.modules.auth.interactions.AuthenticateByCodeUseCase
 import ru.anarchyghost.basketball.modules.auth.interactions.GetAuthUseCase
 import ru.anarchyghost.basketball.modules.auth.interactions.GetUsersUseCase
+import ru.anarchyghost.basketball.modules.place.interactions.usecase.*
 
 @EnableDiscoveryClient
 
 @SpringBootApplication
 @EnableKafka
-@EnableFeignClients(basePackageClasses = [
-    GetUsersUseCase::class,
-    AuthenticateByCodeUseCase::class,
-    GetAuthUseCase::class
-])
+@EnableFeignClients(
+    basePackageClasses = [
+        GetUsersUseCase::class,
+        AuthenticateByCodeUseCase::class,
+        GetAuthUseCase::class,
+        CreatePlaceUseCase::class,
+        GetAllPlacesUseCase::class,
+        UpdatePlaceUseCase::class,
+        GetPlaceByIdUseCase::class,
+        RemovePlaceUseCase::class
+    ]
+)
 internal class ApiApplication
 
 fun main(args: Array<String>) {
