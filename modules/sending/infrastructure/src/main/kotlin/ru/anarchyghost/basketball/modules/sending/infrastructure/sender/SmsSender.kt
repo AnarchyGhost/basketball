@@ -10,6 +10,7 @@ import ru.anarchyghost.basketball.modules.sending.application.message.Notificati
  */
 @Component
 class SmsSender(
+    //TODO: real sms
 //    private val props: Any,
 //    private val smsGateway: Any
 ): Sender {
@@ -18,5 +19,7 @@ class SmsSender(
      * @param to phone number on which message should be sent
      * @param message message which should be sent
      */
-    override fun send(to: String, message: NotificationMessage) {}
+    override fun send(to: String, message: NotificationMessage) {
+        println("Message will be send to $to:\n ${message.text}")
+    }
 }

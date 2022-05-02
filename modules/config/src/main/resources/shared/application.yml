@@ -2,11 +2,9 @@ app:
   kafka:
     server: http://localhost:9092
     topics:
-      sending:
-        sendCode: sending_send_code
-        codeSent: sending_code_sent
       auth:
         codeRequested: auth_code_requested
+        codeCreated: auth_code_created
 
 spring:
   autoconfigure:
