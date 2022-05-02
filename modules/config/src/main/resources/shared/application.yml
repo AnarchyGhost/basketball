@@ -5,3 +5,9 @@ app:
       sending:
         sendCode: sending_send_code
         codeSent: sending_code_sent
+      auth:
+        codeRequested: auth_code_requested
+
+spring:
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration

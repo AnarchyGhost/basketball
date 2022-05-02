@@ -1,0 +1,32 @@
+extend type Mutation {
+    requestAuthCode(
+        username: String
+    ): String
+
+    authWithCode(
+        username: String
+        code: String
+    ): UserAuthenticationResult!
+}
+
+union UserAuthenticationResult = UserAuthenticationPayload | UserAuthenticationError
+
+type User {
+    id: String!
+    phoneNumber: String
+}
+
+type UserAuthenticationPayload {
+    token: String!
+    user: User!
+}
+
+type UserAuthenticationError {
+    code: UserAuthenticationErrorCode!
+    message: String!
+}
+
+enum UserAuthenticationErrorCode {
+    INVALID
+    EXPIRED
+}

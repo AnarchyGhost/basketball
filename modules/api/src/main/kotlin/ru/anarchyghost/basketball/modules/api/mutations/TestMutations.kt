@@ -4,6 +4,7 @@ import com.netflix.graphql.dgs.DgsComponent
 import com.netflix.graphql.dgs.DgsMutation
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.kafka.core.KafkaTemplate
+import org.springframework.security.access.prepost.PreAuthorize
 import ru.anarchyghost.basketball.modules.sending.interactions.events.AuthCodeSentEvent
 import ru.anarchyghost.basketball.modules.sending.interactions.events.SendAuthCodeEvent
 import ru.anarchyghost.basketball.modules.sending.interactions.usecases.SendAuthCodeUseCase
@@ -20,6 +21,7 @@ class TestMutations(
     private lateinit var codeSentTopic: String
 
     @DgsMutation
+    @PreAuthorize("isAuthenticated()")
     fun test(): String {
 //        sendAuthCodeUseCase.execute("","")
         kafkaTemplate.send(sendCodeTopic, SendAuthCodeEvent("to","from"))
