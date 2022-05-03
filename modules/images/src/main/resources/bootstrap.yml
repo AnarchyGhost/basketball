@@ -1,0 +1,23 @@
+# Application-wide properties
+server:
+  port: 0
+
+# Configuring Eureka client, at this moment it's necessary to show where Eureka is located
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://user:bestpasswordever@localhost:8000/eureka
+
+spring:
+  # Set the name of application
+  application:
+    name: images
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: config
+      # Stop the application if can't connect to config service
+      fail-fast: true
