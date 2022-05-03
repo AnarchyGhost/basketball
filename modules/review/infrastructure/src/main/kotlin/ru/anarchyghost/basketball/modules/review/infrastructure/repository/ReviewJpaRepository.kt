@@ -9,6 +9,7 @@ import ru.anarchyghost.basketball.modules.review.domain.Rating
 import ru.anarchyghost.basketball.modules.review.domain.Review
 import java.time.Instant
 import java.util.*
+import javax.persistence.ElementCollection
 import javax.persistence.Entity
 import javax.persistence.Id
 
@@ -24,6 +25,8 @@ data class JpaReview(
     val approvedBy: String?,
     val createdAt: Instant,
     var updatedAt: Instant,
+    @ElementCollection
+    val images: List<String>
 )
 
 @Repository
@@ -45,7 +48,8 @@ internal class ReviewRepositoryImpl(
             updatedAt = updatedAt,
             text = text,
             rate = Rating(rate),
-            placeId = UUID.fromString(placeId)
+            placeId = UUID.fromString(placeId),
+            images = images.map { UUID.fromString(it) }.toMutableList(),
         )
 
         fun Review.toJpa() = JpaReview(
@@ -57,7 +61,8 @@ internal class ReviewRepositoryImpl(
             updatedAt = updatedAt,
             placeId = placeId.toString(),
             rate = rate.rate,
-            text = text
+            text = text,
+            images = images.map { it.toString() }
         )
     }
 

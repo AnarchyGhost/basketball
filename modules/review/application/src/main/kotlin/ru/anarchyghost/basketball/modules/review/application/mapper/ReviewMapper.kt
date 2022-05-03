@@ -12,5 +12,6 @@ internal fun Review.toDto() = ReviewDto(
     updatedAt = updatedAt.toString(),
     text = text,
     placeId = placeId.toString(),
-    rate = rate.rate
+    rate = rate.rate,
+    images = images.map { it.toString() }
 )

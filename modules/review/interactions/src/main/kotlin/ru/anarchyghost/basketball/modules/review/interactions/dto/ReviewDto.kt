@@ -11,4 +11,5 @@ data class ReviewDto(
     val approvedBy: String?,
     val createdAt: String,
     var updatedAt: String,
+    val images: List<String>
 )
