@@ -47,6 +47,8 @@ import ru.anarchyghost.basketball.modules.review.interactions.usecase.UpdateRevi
         GetAllEventsByPlaceIdsUseCase::class,
         GetAllEventsUseCase::class,
         GetEventByIdUseCase::class,
+        AssignUserToEventUseCase::class,
+        RemoveUserFromEventUseCase::class,
     ]
 )
 internal class ApiApplication

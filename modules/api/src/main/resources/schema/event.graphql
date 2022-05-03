@@ -27,6 +27,14 @@ extend type Mutation {
     removeEvent(
         id: String!
     ): String
+
+    joinEvent(
+        eventId: String!
+    ): String
+
+    leaveEvent(
+        eventId: String!
+    ): String
 }
 
 extend type Query {
