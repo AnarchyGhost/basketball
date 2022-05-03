@@ -38,6 +38,16 @@ data class Event(
         setUpdatedAt()
     }
 
+    fun assignUser(user: UUID) {
+        this.users.add(user)
+        setUpdatedAt()
+    }
+
+    fun removeUser(user: UUID) {
+        this.users.remove(user)
+        setUpdatedAt()
+    }
+
     fun update(
         name: String,
         description: String?,

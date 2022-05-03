@@ -6,9 +6,7 @@ import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.security.core.context.SecurityContextHolder
 import ru.anarchyghost.basketball.modules.api.mappers.map
 import ru.anarchyghost.basketball.modules.auth.interactions.CurrentAuthenticatedUserDto
-import ru.anarchyghost.basketball.modules.event.interactions.usecase.CreateEventUseCase
-import ru.anarchyghost.basketball.modules.event.interactions.usecase.RemoveEventUseCase
-import ru.anarchyghost.basketball.modules.event.interactions.usecase.UpdateEventUseCase
+import ru.anarchyghost.basketball.modules.event.interactions.usecase.*
 import ru.anarchyghost.basketball.modules.place.interactions.usecase.GetPlaceByIdUseCase
 
 @DgsComponent
@@ -16,7 +14,9 @@ internal class EventMutations(
     private val createEventUseCase: CreateEventUseCase,
     private val updateEventUseCase: UpdateEventUseCase,
     private val removeEventUseCase: RemoveEventUseCase,
-    private val getPlaceByIdUseCase: GetPlaceByIdUseCase
+    private val getPlaceByIdUseCase: GetPlaceByIdUseCase,
+    private val assignUserToEventUseCase: AssignUserToEventUseCase,
+    private val removeUserFromEventUseCase: RemoveUserFromEventUseCase
 ) {
 
     @PreAuthorize("isAuthenticated()")
@@ -112,5 +112,29 @@ internal class EventMutations(
             userId = (SecurityContextHolder.getContext().authentication.principal as CurrentAuthenticatedUserDto).userId.toString()
         )
         return id
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @DgsMutation
+    fun leaveEvent(
+        eventId: String,
+    ): String {
+        removeUserFromEventUseCase.execute(
+            userId = (SecurityContextHolder.getContext().authentication.principal as CurrentAuthenticatedUserDto).userId.toString(),
+            eventId = eventId
+        )
+        return eventId
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @DgsMutation
+    fun joinEvent(
+        eventId: String,
+    ): String {
+        assignUserToEventUseCase.execute(
+            userId = (SecurityContextHolder.getContext().authentication.principal as CurrentAuthenticatedUserDto).userId.toString(),
+            eventId = eventId
+        )
+        return eventId
     }
 }
