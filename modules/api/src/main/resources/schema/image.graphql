@@ -7,6 +7,14 @@ extend type Mutation {
         placeId: String!
         imageId: String!
     ): String!
+    loadImageToReview(
+        reviewId: String!
+        image: String!
+    ): Image!
+    removeImageFromReview(
+        reviewId: String!
+        imageId: String!
+    ): String!
 }
 
 type Image {

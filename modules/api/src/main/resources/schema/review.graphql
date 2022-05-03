@@ -26,6 +26,7 @@ type Review {
     approvedBy: String
     createdAt: String!
     updatedAt: String!
+    images: [Image!]
 }
 
 enum ReviewStatus {

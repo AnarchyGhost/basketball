@@ -13,10 +13,21 @@ data class Review(
     val approvedBy: UUID?,
     val createdAt: Instant,
     var updatedAt: Instant,
+    val images: MutableList<UUID>
 ) {
 
     private fun setUpdatedAt() {
         this.updatedAt = Instant.now()
+    }
+
+    fun assignImage(image: UUID) {
+        this.images.add(image)
+        setUpdatedAt()
+    }
+
+    fun removeImage(image: UUID) {
+        this.images.remove(image)
+        setUpdatedAt()
     }
 
     fun update(
@@ -53,7 +64,8 @@ data class Review(
             updatedAt = Instant.now(),
             text = text,
             rate = Rating(rate = rate),
-            placeId = placeId
+            placeId = placeId,
+            images = mutableListOf()
         )
     }
 }
