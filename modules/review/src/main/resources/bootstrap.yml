@@ -13,7 +13,7 @@ eureka:
 spring:
   # Set the name of application
   application:
-    name: place
+    name: review
   cloud:
     config:
       discovery:

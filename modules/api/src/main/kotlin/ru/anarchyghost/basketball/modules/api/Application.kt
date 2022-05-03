@@ -10,6 +10,7 @@ import ru.anarchyghost.basketball.modules.auth.interactions.GetAuthUseCase
 import ru.anarchyghost.basketball.modules.auth.interactions.GetUsersUseCase
 import ru.anarchyghost.basketball.modules.place.interactions.usecase.*
 import ru.anarchyghost.basketball.modules.review.interactions.usecase.CreateReviewUseCase
+import ru.anarchyghost.basketball.modules.review.interactions.usecase.GetAllReviewsForPlacesUseCase
 import ru.anarchyghost.basketball.modules.review.interactions.usecase.RemoveReviewUseCase
 import ru.anarchyghost.basketball.modules.review.interactions.usecase.UpdateReviewUseCase
 
@@ -30,6 +31,7 @@ import ru.anarchyghost.basketball.modules.review.interactions.usecase.UpdateRevi
         CreateReviewUseCase::class,
         UpdateReviewUseCase::class,
         RemoveReviewUseCase::class,
+        GetAllReviewsForPlacesUseCase::class
     ]
 )
 internal class ApiApplication

@@ -55,8 +55,11 @@ internal class PlaceMutations(
     @DgsMutation
     fun removePlace(
         id: String
-    ) = removePlaceUseCase.execute(
-        id = id,
-        userId = (SecurityContextHolder.getContext().authentication.principal as CurrentAuthenticatedUserDto).userId.toString()
-    )
+    ): String {
+        removePlaceUseCase.execute(
+            id = id,
+            userId = (SecurityContextHolder.getContext().authentication.principal as CurrentAuthenticatedUserDto).userId.toString()
+        )
+        return id
+    }
 }

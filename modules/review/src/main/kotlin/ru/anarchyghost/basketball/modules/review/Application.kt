@@ -1,4 +1,4 @@
-package ru.anarchyghost.basketball.modules.place
+package ru.anarchyghost.basketball.modules.review
 
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
@@ -8,8 +8,8 @@ import org.springframework.cloud.openfeign.EnableFeignClients
 @SpringBootApplication
 @EnableEurekaClient
 @EnableFeignClients
-internal class ArenaApplication
+internal class ReviewApplication
 
 fun main(args: Array<String>) {
-    SpringApplication.run(ArenaApplication::class.java, *args)
+    SpringApplication.run(ReviewApplication::class.java, *args)
 }

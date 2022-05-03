@@ -27,7 +27,9 @@ data class JpaReview(
 )
 
 @Repository
-interface JpaReviewRepository : JpaRepository<JpaReview, String>
+interface JpaReviewRepository : JpaRepository<JpaReview, String> {
+    fun findAllByPlaceIdIn(placeIds: List<String>): List<JpaReview>
+}
 
 @Component
 internal class ReviewRepositoryImpl(
@@ -61,7 +63,7 @@ internal class ReviewRepositoryImpl(
 
     override fun findReviewById(id: UUID) = jpaReviewRepository.findByIdOrNull(id.toString())?.toModel()
 
-    override fun findAllReviewsByPlaceIds(ids: Collection<UUID>) = jpaReviewRepository.findAllById(ids.map { it.toString() }).map { it.toModel() }
+    override fun findAllReviewsByPlaceIds(ids: Collection<UUID>) = jpaReviewRepository.findAllByPlaceIdIn(ids.map { it.toString() }).map { it.toModel() }
 
     override fun save(review: Review) = jpaReviewRepository.save(review.toJpa()).toModel()
 
