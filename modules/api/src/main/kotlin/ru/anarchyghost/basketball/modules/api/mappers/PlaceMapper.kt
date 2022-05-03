@@ -19,5 +19,6 @@ internal fun PlaceDto.map() = Place(
     createdAt = createdAt,
     kind = PlaceKind.valueOf(kind),
     status = PlaceStatus.valueOf(status),
-    updatedAt = updatedAt
+    updatedAt = updatedAt,
+    reviews = listOf()
 )

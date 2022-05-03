@@ -41,6 +41,7 @@ type Place {
     approvedBy: String
     createdAt: String
     updatedAt: String
+    reviews: [Review!]
 }
 
 enum PlaceStatus {

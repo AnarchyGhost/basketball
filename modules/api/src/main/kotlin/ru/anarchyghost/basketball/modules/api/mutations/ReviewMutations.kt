@@ -47,8 +47,11 @@ internal class ReviewMutations(
     @DgsMutation
     fun removeReview(
         id: String
-    ) = removeReviewUseCase.execute(
-        id = id,
-        userId = (SecurityContextHolder.getContext().authentication.principal as CurrentAuthenticatedUserDto).userId.toString()
-    )
+    ): String {
+        removeReviewUseCase.execute(
+            id = id,
+            userId = (SecurityContextHolder.getContext().authentication.principal as CurrentAuthenticatedUserDto).userId.toString()
+        )
+        return id
+    }
 }
