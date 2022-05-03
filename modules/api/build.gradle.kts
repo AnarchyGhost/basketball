@@ -26,6 +26,7 @@ dependencies {
     implementation(project(":modules:auth:interactions"))
     implementation(project(":modules:place:interactions"))
     implementation(project(":modules:review:interactions"))
+    implementation(project(":modules:images:interactions"))
 }
 repositories {
     mavenCentral()

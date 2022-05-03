@@ -7,5 +7,5 @@ import org.springframework.web.bind.annotation.RequestParam
 @FeignClient(contextId = "deleteImage", name = "images")
 interface DeleteImageUseCase {
     @GetMapping( "/deleteImage")
-    fun saveImage(@RequestParam id: String, @RequestParam userId: String)
+    fun execute(@RequestParam id: String, @RequestParam userId: String)
 }

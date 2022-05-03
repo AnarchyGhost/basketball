@@ -1,7 +1,6 @@
-package ru.anarchyghost.basketball.modules.place.images.repository
+package ru.anarchyghost.basketball.modules.images.repository
 
 import org.springframework.data.jpa.repository.JpaRepository
-import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Component
 import org.springframework.stereotype.Repository
 import ru.anarchyghost.basketball.modules.images.application.repository.ImageRepository
@@ -10,11 +9,13 @@ import java.time.Instant
 import java.util.*
 import javax.persistence.Entity
 import javax.persistence.Id
+import javax.persistence.Lob
 
 @Entity
 data class JpaImage(
     @Id
     val id: String,
+    @Lob
     val image: String,
     val createdBy: String,
     val createdAt: Instant
@@ -44,7 +45,7 @@ internal class ImageRepositoryImpl(
     }
     override fun save(image: Image) = jpaImageRepository.save(image.toJpa()).toModel()
 
-    override fun getImageById(id: UUID) = jpaImageRepository.findByIdOrNull(id.toString())?.toModel()
+    override fun getAllImagesByIds(ids: List<UUID>) = jpaImageRepository.findAllById(ids.map { it.toString() }).map { it.toModel() }
 
     override fun removeImage(id: UUID) = jpaImageRepository.deleteById(id.toString())
 

@@ -14,4 +14,5 @@ data class PlaceDto(
     val approvedBy: String?,
     val createdAt: String,
     val updatedAt: String,
+    val images: List<String>
 )
