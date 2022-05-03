@@ -7,7 +7,7 @@ data class Image(
     val id: UUID,
     val image: String,
     val createdBy: UUID,
-    val createdAt: Instant
+    val createdAt: Long
 ) {
     companion object {
         fun create(
@@ -18,7 +18,7 @@ data class Image(
                 id = UUID.randomUUID(),
                 image = image,
                 createdBy = createdBy,
-                createdAt = Instant.now()
+                createdAt = Instant.now().toEpochMilli()
             )
     }
 }

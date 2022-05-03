@@ -15,6 +15,14 @@ extend type Mutation {
         reviewId: String!
         imageId: String!
     ): String!
+    loadImageToEvent(
+        reviewId: String!
+        image: String!
+    ): Image!
+    removeImageFromEvent(
+        reviewId: String!
+        imageId: String!
+    ): String!
 }
 
 type Image {

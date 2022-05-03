@@ -6,9 +6,10 @@ import org.springframework.stereotype.Component
 import org.springframework.stereotype.Repository
 import ru.anarchyghost.basketball.modules.place.application.repository.PlaceRepository
 import ru.anarchyghost.basketball.modules.place.domain.Place
-import java.time.Instant
 import java.util.*
-import javax.persistence.*
+import javax.persistence.ElementCollection
+import javax.persistence.Entity
+import javax.persistence.Id
 
 @Entity
 data class PlaceJpa(
@@ -25,8 +26,8 @@ data class PlaceJpa(
     val kind: String,
     val createdBy: String,
     val approvedBy: String?,
-    val createdAt: Instant,
-    val updatedAt: Instant,
+    val createdAt: Long,
+    val updatedAt: Long,
     @ElementCollection
     val images: List<String>
 )

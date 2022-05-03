@@ -8,6 +8,7 @@ import org.springframework.kafka.annotation.EnableKafka
 import ru.anarchyghost.basketball.modules.auth.interactions.AuthenticateByCodeUseCase
 import ru.anarchyghost.basketball.modules.auth.interactions.GetAuthUseCase
 import ru.anarchyghost.basketball.modules.auth.interactions.GetUsersUseCase
+import ru.anarchyghost.basketball.modules.event.interactions.usecase.*
 import ru.anarchyghost.basketball.modules.images.interactions.usecase.DeleteImageUseCase
 import ru.anarchyghost.basketball.modules.images.interactions.usecase.GetImagesByIdsUseCase
 import ru.anarchyghost.basketball.modules.images.interactions.usecase.SaveImageUseCase
@@ -39,7 +40,13 @@ import ru.anarchyghost.basketball.modules.review.interactions.usecase.UpdateRevi
         SaveImageUseCase::class,
         RemoveImageFromPlaceUseCase::class,
         DeleteImageUseCase::class,
-        GetImagesByIdsUseCase::class
+        GetImagesByIdsUseCase::class,
+        CreateEventUseCase::class,
+        UpdateEventUseCase::class,
+        RemoveEventUseCase::class,
+        GetAllEventsByPlaceIdsUseCase::class,
+        GetAllEventsUseCase::class,
+        GetEventByIdUseCase::class,
     ]
 )
 internal class ApiApplication

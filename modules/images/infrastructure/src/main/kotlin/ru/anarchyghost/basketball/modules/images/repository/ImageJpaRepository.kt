@@ -5,7 +5,6 @@ import org.springframework.stereotype.Component
 import org.springframework.stereotype.Repository
 import ru.anarchyghost.basketball.modules.images.application.repository.ImageRepository
 import ru.anarchyghost.basketball.modules.images.domain.Image
-import java.time.Instant
 import java.util.*
 import javax.persistence.Entity
 import javax.persistence.Id
@@ -18,7 +17,7 @@ data class JpaImage(
     @Lob
     val image: String,
     val createdBy: String,
-    val createdAt: Instant
+    val createdAt: Long
 )
 
 @Repository
