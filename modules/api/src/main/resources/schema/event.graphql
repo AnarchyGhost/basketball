@@ -1,0 +1,66 @@
+extend type Mutation {
+    createEvent(
+        placeId: String
+        latitude: Float
+        longitude: Float
+        name: String!
+        description: String
+        address: String
+        sports: [SportKind!]!
+        startDateTime: String
+        endDateTime: String
+    ): Event!
+
+    updateEvent(
+        id: String!
+        name: String!
+        description: String
+        sports: [SportKind!]!
+        latitude: Float
+        longitude: Float
+        address: String
+        placeId: String
+        startDateTime: String!
+        endDateTime: String!
+    ): Event
+
+    removeEvent(
+        id: String!
+    ): String
+}
+
+extend type Query {
+    events: [Event]
+    event(
+        id: String!
+    ): Event
+}
+
+type Event {
+    id: String!
+    latitude: Float!
+    longitude: Float!
+    name: String!
+    description: String
+    address: String
+    status: EventStatus
+    kind: EventKind
+    sports: [SportKind!]!
+    createdBy: String
+    approvedBy: String
+    createdAt: String
+    updatedAt: String
+    images: [Image!]
+    placeId: String
+    startDateTime: String
+    endDateTime: String
+    users: [String!]
+}
+
+enum EventStatus {
+    UNAPPROVED, APPROVED, REMOVED
+}
+
+enum EventKind {
+    OPEN, CLOSED, NOT_WORKS
+}

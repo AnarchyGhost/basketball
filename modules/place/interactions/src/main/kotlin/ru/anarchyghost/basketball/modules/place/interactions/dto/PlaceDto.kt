@@ -12,7 +12,7 @@ data class PlaceDto(
     val kind: String,
     val createdBy: String,
     val approvedBy: String?,
-    val createdAt: String,
-    val updatedAt: String,
+    val createdAt: Long,
+    val updatedAt: Long,
     val images: List<String>
 )

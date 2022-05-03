@@ -9,7 +9,7 @@ data class ReviewDto(
     var status: String,
     val createdBy: String,
     val approvedBy: String?,
-    val createdAt: String,
-    var updatedAt: String,
+    val createdAt: Long,
+    var updatedAt: Long,
     val images: List<String>
 )

@@ -15,7 +15,7 @@ internal fun Place.toDto() = PlaceDto(
     sports = sports.map { it.name },
     createdBy = createdBy.toString(),
     approvedBy = approvedBy?.toString(),
-    createdAt = createdAt.toString(),
-    updatedAt = updatedAt.toString(),
+    createdAt = createdAt,
+    updatedAt = updatedAt,
     images = images.map { it.toString() }
 )

@@ -11,13 +11,13 @@ data class Review(
     var status: ReviewStatus,
     val createdBy: UUID,
     val approvedBy: UUID?,
-    val createdAt: Instant,
-    var updatedAt: Instant,
+    val createdAt: Long,
+    var updatedAt: Long,
     val images: MutableList<UUID>
 ) {
 
     private fun setUpdatedAt() {
-        this.updatedAt = Instant.now()
+        this.updatedAt = Instant.now().toEpochMilli()
     }
 
     fun assignImage(image: UUID) {
@@ -60,8 +60,8 @@ data class Review(
             status = ReviewStatus.UNAPPROVED,
             createdBy = createdBy,
             approvedBy = null,
-            createdAt = Instant.now(),
-            updatedAt = Instant.now(),
+            createdAt = Instant.now().toEpochMilli(),
+            updatedAt = Instant.now().toEpochMilli(),
             text = text,
             rate = Rating(rate = rate),
             placeId = placeId,

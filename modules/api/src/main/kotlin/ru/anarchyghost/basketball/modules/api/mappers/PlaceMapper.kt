@@ -13,10 +13,10 @@ internal fun PlaceDto.map() = Place(
     createdBy = createdBy,
     sports = sports.map {SportKind.valueOf(it)},
     approvedBy = approvedBy,
-    createdAt = createdAt,
+    createdAt = createdAt.toString(),
     kind = PlaceKind.valueOf(kind),
     status = PlaceStatus.valueOf(status),
-    updatedAt = updatedAt,
+    updatedAt = updatedAt.toString(),
     reviews = listOf(),
     images = images.map { Image(id = it) }
 )

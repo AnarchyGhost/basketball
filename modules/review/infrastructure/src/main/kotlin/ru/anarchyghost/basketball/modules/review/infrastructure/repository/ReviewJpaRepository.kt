@@ -7,7 +7,6 @@ import org.springframework.stereotype.Repository
 import ru.anarchyghost.basketball.modules.review.application.repository.ReviewRepository
 import ru.anarchyghost.basketball.modules.review.domain.Rating
 import ru.anarchyghost.basketball.modules.review.domain.Review
-import java.time.Instant
 import java.util.*
 import javax.persistence.ElementCollection
 import javax.persistence.Entity
@@ -23,8 +22,8 @@ data class JpaReview(
     var status: String,
     val createdBy: String,
     val approvedBy: String?,
-    val createdAt: Instant,
-    var updatedAt: Instant,
+    val createdAt: Long,
+    var updatedAt: Long,
     @ElementCollection
     val images: List<String>
 )
