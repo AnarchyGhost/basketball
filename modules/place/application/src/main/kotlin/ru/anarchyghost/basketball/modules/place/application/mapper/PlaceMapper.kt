@@ -17,4 +17,5 @@ internal fun Place.toDto() = PlaceDto(
     approvedBy = approvedBy?.toString(),
     createdAt = createdAt.toString(),
     updatedAt = updatedAt.toString(),
+    images = images.map { it.toString() }
 )

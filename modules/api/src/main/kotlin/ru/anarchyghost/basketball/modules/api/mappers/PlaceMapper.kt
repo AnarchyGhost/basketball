@@ -1,9 +1,6 @@
 package ru.anarchyghost.basketball.modules.api.mappers
 
-import com.netflix.dgs.codgen.generated.types.Place
-import com.netflix.dgs.codgen.generated.types.PlaceKind
-import com.netflix.dgs.codgen.generated.types.PlaceStatus
-import com.netflix.dgs.codgen.generated.types.SportKind
+import com.netflix.dgs.codgen.generated.types.*
 import ru.anarchyghost.basketball.modules.place.interactions.dto.PlaceDto
 
 internal fun PlaceDto.map() = Place(
@@ -20,5 +17,6 @@ internal fun PlaceDto.map() = Place(
     kind = PlaceKind.valueOf(kind),
     status = PlaceStatus.valueOf(status),
     updatedAt = updatedAt,
-    reviews = listOf()
+    reviews = listOf(),
+    images = images.map { Image(id = it) }
 )

@@ -17,10 +17,21 @@ data class Place(
     val approvedBy: UUID?,
     val createdAt: Instant,
     var updatedAt: Instant,
+    val images: MutableList<UUID>
 ) {
 
     private fun setUpdatedAt() {
         this.updatedAt = Instant.now()
+    }
+
+    fun assignImage(image: UUID) {
+        this.images.add(image)
+        setUpdatedAt()
+    }
+
+    fun removeImage(image: UUID) {
+        this.images.remove(image)
+        setUpdatedAt()
     }
 
     fun update(
@@ -74,7 +85,8 @@ data class Place(
             approvedBy = null,
             createdAt = Instant.now(),
             updatedAt = Instant.now(),
-            sports = sports
+            sports = sports,
+            images = mutableListOf()
         )
     }
 }

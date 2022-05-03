@@ -20,13 +20,15 @@ data class PlaceJpa(
     val description: String?,
     val address: String?,
     val status: String,
-    @ElementCollection(fetch = FetchType.EAGER)
+    @ElementCollection
     val sports: List<String>,
     val kind: String,
     val createdBy: String,
     val approvedBy: String?,
     val createdAt: Instant,
     val updatedAt: Instant,
+    @ElementCollection
+    val images: List<String>
 )
 
 @Repository
@@ -50,7 +52,8 @@ internal class PlaceRepositoryImpl(
             approvedBy = approvedBy?.let { UUID.fromString(it) },
             createdAt = createdAt,
             updatedAt = updatedAt,
-            sports = sports.map { Place.SportKind.valueOf(it) }
+            sports = sports.map { Place.SportKind.valueOf(it) },
+            images = images.map { UUID.fromString(it) }.toMutableList()
         )
 
         fun Place.toJpa() = PlaceJpa(
@@ -66,7 +69,8 @@ internal class PlaceRepositoryImpl(
             approvedBy = approvedBy?.toString(),
             createdAt = createdAt,
             updatedAt = updatedAt,
-            sports = sports.map { it.name }
+            sports = sports.map { it.name },
+            images = images.map { it.toString() }
         )
     }
 

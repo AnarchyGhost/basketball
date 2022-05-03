@@ -1,0 +1,17 @@
+extend type Mutation {
+    loadImageToPlace(
+        placeId: String!
+        image: String!
+    ): Image!
+    removeImageFromPlace(
+        placeId: String!
+        imageId: String!
+    ): String!
+}
+
+type Image {
+    id: String!
+    value: String
+    createdAt: String
+    createdBy: String
+}

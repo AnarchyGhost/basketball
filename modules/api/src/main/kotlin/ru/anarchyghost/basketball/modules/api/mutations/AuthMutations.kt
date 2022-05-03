@@ -26,6 +26,7 @@ internal class AuthMutations(
 
     @DgsMutation
     fun requestAuthCode(username: String): String {
+        println(username)
         kafkaTemplate.send(codeRequestedTopic, AuthCodeRequestedEvent(username))
         return username
     }

@@ -12,8 +12,8 @@ internal class DeleteImageUseCaseImpl(
     private val imageRepository: ImageRepository
 ) : DeleteImageUseCase {
     @GetMapping("/deleteImage")
-    override fun saveImage(@RequestParam id: String, @RequestParam userId: String) {
-        imageRepository.getImageById(UUID.fromString(id))?.let {
+    override fun execute(@RequestParam id: String, @RequestParam userId: String) {
+        imageRepository.getAllImagesByIds(listOf(UUID.fromString(id))).lastOrNull()?.let {
             check(it.createdBy.toString() == userId) { "You have no permission to do this action" }
             imageRepository.removeImage(UUID.fromString(id))
         }
