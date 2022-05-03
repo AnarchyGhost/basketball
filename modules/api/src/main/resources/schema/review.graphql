@@ -1,0 +1,33 @@
+extend type Mutation {
+    createReview(
+        placeId: String!
+        text: String
+        rate: Int!
+    ): Review!
+
+    updateReview(
+        id: String
+        text: String
+        rate: Int
+    ): Review
+
+    removeReview(
+        id: String!
+    ): String
+}
+
+type Review {
+    id: String!
+    placeId: String!
+    text: String
+    rate: Int!
+    status: ReviewStatus!
+    createdBy: String!
+    approvedBy: String
+    createdAt: String!
+    updatedAt: String!
+}
+
+enum ReviewStatus {
+    UNAPPROVED, APPROVED, REMOVED
+}

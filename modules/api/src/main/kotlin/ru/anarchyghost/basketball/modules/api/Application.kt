@@ -9,6 +9,9 @@ import ru.anarchyghost.basketball.modules.auth.interactions.AuthenticateByCodeUs
 import ru.anarchyghost.basketball.modules.auth.interactions.GetAuthUseCase
 import ru.anarchyghost.basketball.modules.auth.interactions.GetUsersUseCase
 import ru.anarchyghost.basketball.modules.place.interactions.usecase.*
+import ru.anarchyghost.basketball.modules.review.interactions.usecase.CreateReviewUseCase
+import ru.anarchyghost.basketball.modules.review.interactions.usecase.RemoveReviewUseCase
+import ru.anarchyghost.basketball.modules.review.interactions.usecase.UpdateReviewUseCase
 
 @EnableDiscoveryClient
 
@@ -23,7 +26,10 @@ import ru.anarchyghost.basketball.modules.place.interactions.usecase.*
         GetAllPlacesUseCase::class,
         UpdatePlaceUseCase::class,
         GetPlaceByIdUseCase::class,
-        RemovePlaceUseCase::class
+        RemovePlaceUseCase::class,
+        CreateReviewUseCase::class,
+        UpdateReviewUseCase::class,
+        RemoveReviewUseCase::class,
     ]
 )
 internal class ApiApplication
