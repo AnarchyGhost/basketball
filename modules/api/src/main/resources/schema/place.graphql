@@ -44,6 +44,7 @@ type Place {
     averageRate: Int
     reviews: [Review!]
     images: [Image!]
+    events: [Event!]
 }
 
 enum PlaceStatus {

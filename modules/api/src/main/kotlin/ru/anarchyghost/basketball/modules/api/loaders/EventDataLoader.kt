@@ -8,7 +8,7 @@ import ru.anarchyghost.basketball.modules.event.interactions.usecase.GetAllEvent
 import java.util.concurrent.CompletableFuture
 import java.util.concurrent.CompletionStage
 
-@DgsDataLoader(name = "reviews")
+@DgsDataLoader(name = "events")
 internal class EventDataLoader(
     private val getAllEventsByPlaceIdsUseCase: GetAllEventsByPlaceIdsUseCase
 ) : MappedBatchLoader<String, List<Event>> {
