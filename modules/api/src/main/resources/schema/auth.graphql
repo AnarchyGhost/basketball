@@ -7,6 +7,16 @@ extend type Mutation {
         username: String
         code: String
     ): UserAuthenticationResult!
+
+    givePermissionsToUser(
+        userId: String!
+        permission: UserPermissions!
+    ): String
+
+    removePermissionsFromUser(
+        userId: String!
+        permission: UserPermissions!
+    ): String
 }
 
 union UserAuthenticationResult = UserAuthenticationPayload | UserAuthenticationError
@@ -14,6 +24,7 @@ union UserAuthenticationResult = UserAuthenticationPayload | UserAuthenticationE
 type User {
     id: String!
     phoneNumber: String
+    userPermissions: [String!]
 }
 
 type UserAuthenticationPayload {
@@ -29,4 +40,11 @@ type UserAuthenticationError {
 enum UserAuthenticationErrorCode {
     INVALID
     EXPIRED
+}
+
+enum UserPermissions {
+    ADMIN
+    MODER
+    MANAGER
+    PLACE_OWNER
 }

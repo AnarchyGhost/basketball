@@ -9,17 +9,21 @@ import com.netflix.graphql.dgs.DgsDataFetchingEnvironment
 import com.netflix.graphql.dgs.DgsMutation
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.kafka.core.KafkaTemplate
+import org.springframework.security.access.prepost.PreAuthorize
+import org.springframework.security.core.context.SecurityContextHolder
 import ru.anarchyghost.basketball.modules.api.loaders.UserDataLoader
 import ru.anarchyghost.basketball.modules.api.mappers.map
-import ru.anarchyghost.basketball.modules.auth.interactions.AuthenticationDto
+import ru.anarchyghost.basketball.modules.auth.interactions.*
 import ru.anarchyghost.basketball.modules.auth.interactions.events.AuthCodeRequestedEvent
-import ru.anarchyghost.basketball.modules.auth.interactions.AuthenticateByCodeUseCase
+import java.util.*
 import java.util.concurrent.CompletableFuture
 
 @DgsComponent
 internal class AuthMutations(
     private val kafkaTemplate: KafkaTemplate<String, Any>,
-    private val authenticateByCodeUseCase: AuthenticateByCodeUseCase
+    private val authenticateByCodeUseCase: AuthenticateByCodeUseCase,
+    private val removeRoleFromUserUseCase: RemoveRoleFromUserUseCase,
+    private val assignRoleToUserUseCase: AssignRoleToUserUseCase
 ) {
     @Value("\${app.kafka.topics.auth.codeRequested}")
     private lateinit var codeRequestedTopic: String
@@ -51,6 +55,34 @@ internal class AuthMutations(
             return it.map()
         }
         return authenticationDto.map()
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @DgsMutation
+    fun givePermissionsToUser(
+    userId: String,
+    permission: String
+    ): String {
+        assignRoleToUserUseCase.execute(
+            userId = (SecurityContextHolder.getContext().authentication.principal as CurrentAuthenticatedUserDto).userId,
+            assignRole = UserPermissionDto.valueOf(permission),
+            assignTo = UUID.fromString(userId)
+        )
+        return userId
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @DgsMutation
+    fun removePermissionsFromUser(
+    userId: String,
+    permission: String
+    ): String {
+        removeRoleFromUserUseCase.execute(
+            userId = (SecurityContextHolder.getContext().authentication.principal as CurrentAuthenticatedUserDto).userId,
+            removeRole = UserPermissionDto.valueOf(permission),
+            removeFrom = UUID.fromString(userId)
+        )
+        return userId
     }
 
 }

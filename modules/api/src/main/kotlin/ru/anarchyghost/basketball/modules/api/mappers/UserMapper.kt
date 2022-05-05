@@ -1,9 +1,6 @@
 package ru.anarchyghost.basketball.modules.api.mappers
 
-import com.netflix.dgs.codgen.generated.types.User
-import com.netflix.dgs.codgen.generated.types.UserAuthenticationError
-import com.netflix.dgs.codgen.generated.types.UserAuthenticationErrorCode
-import com.netflix.dgs.codgen.generated.types.UserAuthenticationPayload
+import com.netflix.dgs.codgen.generated.types.*
 import ru.anarchyghost.basketball.modules.auth.interactions.AuthenticationDto
 import ru.anarchyghost.basketball.modules.auth.interactions.UserDto
 
@@ -19,5 +16,6 @@ internal fun AuthenticationDto.map() = UserAuthenticationPayload(
 
 internal fun UserDto.map() = User(
     id = id.toString(),
-    phoneNumber = phoneNumber
+    phoneNumber = phoneNumber,
+    userPermissions = permissions.map { it.name }
 )
