@@ -4,4 +4,5 @@ import java.util.*
 
 data class CurrentAuthenticatedUserDto(
     val userId: UUID,
+    val profileId: UUID?
 )

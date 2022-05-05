@@ -15,6 +15,9 @@ import ru.anarchyghost.basketball.modules.api.loaders.UserDataLoader
 import ru.anarchyghost.basketball.modules.api.mappers.map
 import ru.anarchyghost.basketball.modules.auth.interactions.*
 import ru.anarchyghost.basketball.modules.auth.interactions.events.AuthCodeRequestedEvent
+import ru.anarchyghost.basketball.modules.images.interactions.usecase.SaveImageUseCase
+import ru.anarchyghost.basketball.modules.profile.interactions.CreateProfileUseCase
+import ru.anarchyghost.basketball.modules.profile.interactions.UpdateProfileUseCase
 import java.util.*
 import java.util.concurrent.CompletableFuture
 
@@ -23,7 +26,11 @@ internal class AuthMutations(
     private val kafkaTemplate: KafkaTemplate<String, Any>,
     private val authenticateByCodeUseCase: AuthenticateByCodeUseCase,
     private val removeRoleFromUserUseCase: RemoveRoleFromUserUseCase,
-    private val assignRoleToUserUseCase: AssignRoleToUserUseCase
+    private val assignRoleToUserUseCase: AssignRoleToUserUseCase,
+    private val createProfileUseCase: CreateProfileUseCase,
+    private val updateProfileUseCase: UpdateProfileUseCase,
+    private val saveImageUseCase: SaveImageUseCase,
+    private val assignProfileToUserUseCase: AssignProfileToUserUseCase
 ) {
     @Value("\${app.kafka.topics.auth.codeRequested}")
     private lateinit var codeRequestedTopic: String
@@ -83,6 +90,34 @@ internal class AuthMutations(
             removeFrom = UUID.fromString(userId)
         )
         return userId
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @DgsMutation
+    fun saveUserProfile(
+        image: String?,
+        email: String?,
+        username: String,
+    ): String {
+        val currentUser = SecurityContextHolder.getContext().authentication.principal as CurrentAuthenticatedUserDto
+        val imgId = image?.let { saveImageUseCase.execute(image, currentUser.userId.toString()) }
+        return if(currentUser.profileId == null) {
+            val profile = createProfileUseCase.execute(
+                username = username,
+                email = email,
+                imageId = imgId?.id
+            )
+            assignProfileToUserUseCase.execute(userId = currentUser.userId, profileId = UUID.fromString(profile.id))
+            profile.id
+        } else {
+            updateProfileUseCase.execute(
+                profileId = currentUser.profileId!!.toString(),
+                username = username,
+                email = email,
+                imageId = imgId?.id
+            )
+            currentUser.profileId.toString()
+        }
     }
 
 }

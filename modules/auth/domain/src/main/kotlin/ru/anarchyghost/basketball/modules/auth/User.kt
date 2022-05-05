@@ -5,7 +5,8 @@ import java.util.UUID
 data class User(
     val id: UUID,
     val phoneNumber: String,
-    val permissions: MutableList<UserPermission>
+    val permissions: MutableList<UserPermission>,
+    var profileId: UUID?
 ) {
     companion object {
         fun create(
@@ -13,7 +14,8 @@ data class User(
         ) = User(
             phoneNumber = phoneNumber,
             id = UUID.randomUUID(),
-            permissions = mutableListOf()
+            permissions = mutableListOf(),
+            profileId = null
         )
     }
 
@@ -28,6 +30,13 @@ data class User(
         permission: UserPermission
     ) {
         this.permissions.remove(permission)
+    }
+
+    fun assignProfile(
+        profileId: UUID
+    ) {
+        check(this.profileId == null) {"Profile already exists"}
+        this.profileId = profileId
     }
 
     enum class UserPermission {

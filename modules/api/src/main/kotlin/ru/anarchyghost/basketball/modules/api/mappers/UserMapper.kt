@@ -17,5 +17,6 @@ internal fun AuthenticationDto.map() = UserAuthenticationPayload(
 internal fun UserDto.map() = User(
     id = id.toString(),
     phoneNumber = phoneNumber,
-    userPermissions = permissions.map { it.name }
+    userPermissions = permissions.map { it.name },
+    profile = profileId?.let { Profile(id = it) }
 )
