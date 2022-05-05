@@ -2,6 +2,7 @@ package ru.anarchyghost.basketball.modules.auth.application.usecase
 
 import org.springframework.security.core.Authentication
 import org.springframework.security.core.GrantedAuthority
+import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
@@ -33,25 +34,25 @@ internal class TokenAuthenticationServiceImpl(
 }
 
 class TokenAuthentication(
-    private val details: User,
+    private val user: User,
 ) : Authentication {
 
-    override fun getName(): String = details.id.toString()
+    override fun getName(): String = user.id.toString()
 
     override fun getAuthorities(): MutableCollection<out GrantedAuthority> {
-        return mutableListOf()
+        return user.permissions.map { SimpleGrantedAuthority(it.name) }.toMutableList()
     }
 
     override fun getCredentials(): Any {
-        return details.id
+        return user.id
     }
 
     override fun getDetails(): Any {
-        return details
+        return user
     }
 
     override fun getPrincipal(): Any {
-        return CurrentAuthenticatedUserDto(details.id)
+        return CurrentAuthenticatedUserDto(user.id)
     }
 
     override fun isAuthenticated(): Boolean = true
