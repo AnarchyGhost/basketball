@@ -6,12 +6,8 @@ import org.springframework.stereotype.Component
 import org.springframework.stereotype.Repository
 import ru.anarchyghost.basketball.modules.auth.User
 import ru.anarchyghost.basketball.modules.auth.application.repository.UserRepository
-import java.time.Instant
 import java.util.*
-import javax.persistence.Column
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.Id
+import javax.persistence.*
 
 @Entity
 internal data class JpaUser(
@@ -20,8 +16,8 @@ internal data class JpaUser(
     val id: UUID?,
     @Column(unique = true)
     val phoneNumber: String,
-    val createdAt: Long = Instant.now().toEpochMilli(),
-    var updatedAt: Long = Instant.now().toEpochMilli()
+    @ElementCollection
+    val permissions: List<String>
 )
 
 @Repository
@@ -37,11 +33,13 @@ internal class UserRepositoryImpl(
         fun User.map() = JpaUser(
             id = id,
             phoneNumber = phoneNumber,
+            permissions = permissions.map {it.name}
         )
 
         fun JpaUser.map() = User(
             id = id!!,
             phoneNumber = phoneNumber,
+            permissions = permissions.map {User.UserPermission.valueOf(it)}.toMutableList()
         )
     }
     override fun findById(id: UUID): User? {
