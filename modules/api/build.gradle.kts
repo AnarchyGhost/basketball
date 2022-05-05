@@ -27,6 +27,7 @@ dependencies {
     implementation(project(":modules:place:interactions"))
     implementation(project(":modules:review:interactions"))
     implementation(project(":modules:images:interactions"))
+    implementation(project(":modules:profile:interactions"))
     implementation(project(":modules:event:interactions"))
 }
 repositories {

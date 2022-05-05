@@ -17,6 +17,23 @@ extend type Mutation {
         userId: String!
         permission: UserPermissions!
     ): String
+
+    saveUserProfile(
+        image: String
+        email: String
+        username: String!
+    ): String
+}
+
+extend type Query {
+    user: User!
+}
+
+type Profile {
+    id: String!
+    username: String
+    email: String
+    image: Image
 }
 
 union UserAuthenticationResult = UserAuthenticationPayload | UserAuthenticationError
@@ -25,6 +42,7 @@ type User {
     id: String!
     phoneNumber: String
     userPermissions: [String!]
+    profile: Profile
 }
 
 type UserAuthenticationPayload {

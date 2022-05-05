@@ -1,9 +1,6 @@
 package ru.anarchyghost.basketball.modules.api.data
 
-import com.netflix.dgs.codgen.generated.types.Event
-import com.netflix.dgs.codgen.generated.types.Image
-import com.netflix.dgs.codgen.generated.types.Place
-import com.netflix.dgs.codgen.generated.types.Review
+import com.netflix.dgs.codgen.generated.types.*
 import com.netflix.graphql.dgs.DgsComponent
 import com.netflix.graphql.dgs.DgsData
 import com.netflix.graphql.dgs.DgsDataFetchingEnvironment
@@ -36,6 +33,13 @@ internal class ImageDataFetcher(
         val ids = dfe.getSource<Event>().images!!.map { it.id }
         return CompletableFuture.supplyAsync {
             getImagesByIdsUseCase.execute(ids).map { it.map() }.toMutableList()
+        }
+    }
+
+    @DgsData(parentType = "Profile", field = "image")
+    fun imageForProfile(dfe: DgsDataFetchingEnvironment): CompletableFuture<Image?> {
+        return CompletableFuture.supplyAsync {
+            dfe.getSource<Profile>().image?.id?.let { getImagesByIdsUseCase.execute(listOf(it)).lastOrNull()?.map() }
         }
     }
 }

@@ -11,6 +11,8 @@ import ru.anarchyghost.basketball.modules.images.interactions.usecase.DeleteImag
 import ru.anarchyghost.basketball.modules.images.interactions.usecase.GetImagesByIdsUseCase
 import ru.anarchyghost.basketball.modules.images.interactions.usecase.SaveImageUseCase
 import ru.anarchyghost.basketball.modules.place.interactions.usecase.*
+import ru.anarchyghost.basketball.modules.profile.interactions.CreateProfileUseCase
+import ru.anarchyghost.basketball.modules.profile.interactions.UpdateProfileUseCase
 import ru.anarchyghost.basketball.modules.review.interactions.usecase.CreateReviewUseCase
 import ru.anarchyghost.basketball.modules.review.interactions.usecase.GetAllReviewsForPlacesUseCase
 import ru.anarchyghost.basketball.modules.review.interactions.usecase.RemoveReviewUseCase
@@ -49,6 +51,9 @@ import ru.anarchyghost.basketball.modules.review.interactions.usecase.UpdateRevi
         RemoveUserFromEventUseCase::class,
         RemoveRoleFromUserUseCase::class,
         AssignRoleToUserUseCase::class,
+        CreateProfileUseCase::class,
+        UpdateProfileUseCase::class,
+        AssignProfileToUserUseCase::class
     ]
 )
 internal class ApiApplication

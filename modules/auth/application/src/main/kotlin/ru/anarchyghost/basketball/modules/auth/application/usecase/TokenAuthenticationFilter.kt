@@ -52,7 +52,7 @@ class TokenAuthentication(
     }
 
     override fun getPrincipal(): Any {
-        return CurrentAuthenticatedUserDto(user.id)
+        return CurrentAuthenticatedUserDto(user.id, user.profileId)
     }
 
     override fun isAuthenticated(): Boolean = true

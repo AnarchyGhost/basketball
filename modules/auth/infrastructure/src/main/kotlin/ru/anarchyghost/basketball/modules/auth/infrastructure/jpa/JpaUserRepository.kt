@@ -17,7 +17,9 @@ internal data class JpaUser(
     @Column(unique = true)
     val phoneNumber: String,
     @ElementCollection
-    val permissions: List<String>
+    val permissions: List<String>,
+    @Column(unique = true)
+    val profileId: String?
 )
 
 @Repository
@@ -33,13 +35,15 @@ internal class UserRepositoryImpl(
         fun User.map() = JpaUser(
             id = id,
             phoneNumber = phoneNumber,
-            permissions = permissions.map {it.name}
+            permissions = permissions.map {it.name},
+            profileId = profileId?.toString()
         )
 
         fun JpaUser.map() = User(
             id = id!!,
             phoneNumber = phoneNumber,
-            permissions = permissions.map {User.UserPermission.valueOf(it)}.toMutableList()
+            permissions = permissions.map {User.UserPermission.valueOf(it)}.toMutableList(),
+            profileId = profileId?.let { UUID.fromString(it) }
         )
     }
     override fun findById(id: UUID): User? {
