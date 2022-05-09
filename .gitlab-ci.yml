@@ -18,8 +18,8 @@ build:
   artifacts:
     paths:
       - modules/*/build/libs/*-boot.jar
-  when:
-    - manual
+  only:
+    - stage
 
 buildDocs:
   image: gradle:7.4.2-jdk11-alpine
@@ -35,9 +35,7 @@ buildDocs:
     paths:
       - build/dokka/htmlCollector
   only:
-    - main
-  when:
-    - manual
+    - stage
 
 deployDocs:
   image: ubuntu
@@ -52,7 +50,5 @@ deployDocs:
     - chmod 644 ~/.ssh/known_hosts
   script: scp -r build/dokka/htmlCollector/* $USER@$HOST:/var/www/basketball.anarchyghost.com/html/javadoc
   only:
-    - main
-  when:
-    - manual
+    - stage
 
