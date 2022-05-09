@@ -15,6 +15,9 @@ build:
     paths:
       - build
       - .gradle
+  artifacts:
+    paths:
+      - modules/*/build/libs/*-boot.jar
   when:
     - manual
 
