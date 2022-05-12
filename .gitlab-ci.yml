@@ -36,10 +36,11 @@ buildDocs:
       - build/dokka/htmlCollector
   only:
     - stage
+  when: manual
 
 deployDocs:
   image: ubuntu
-  stage: deploy
+  stage: deployDocs
   before_script:
     - 'command -v ssh-agent >/dev/null || ( apt-get update -y && apt-get install openssh-client -y )'
     - eval $(ssh-agent -s)
@@ -51,4 +52,11 @@ deployDocs:
   script: scp -r build/dokka/htmlCollector/* $USER@$HOST:/var/www/basketball.anarchyghost.com/html/javadoc
   only:
     - stage
+  when: manual
 
+build images:
+  image: docker
+  stage: deployApp
+  script: "#!/usr/bin/bash for f in modules/*/build/libs/*-boot.jar; do echo \"$f\" docker build --build-arg buildPath=\"$f\" . done"
+  only:
+    - stage

@@ -3,6 +3,7 @@ extend type Mutation {
         latitude: Float!
         longitude: Float!
         name: String!
+        images: [String]
         description: String
         address: String
         sports: [SportKind!]!

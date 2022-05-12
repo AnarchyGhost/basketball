@@ -22,6 +22,7 @@ internal class CreatePlaceUseCaseImpl(
         @RequestParam address: String?,
         @RequestParam sports: List<String>,
         @RequestParam createdBy: UUID,
+        @RequestParam images: List<String>
     ) = placeRepository.save(
         Place.create(
             latitude = latitude,
@@ -31,6 +32,7 @@ internal class CreatePlaceUseCaseImpl(
             address = address,
             sports = sports.map { Place.SportKind.valueOf(it) },
             createdBy = createdBy,
+            images = images.map { UUID.fromString(it) }
         )
     ).toDto()
 }

@@ -20,7 +20,8 @@ internal class PlaceDataInit(
             name = "Площадка у дома",
             createdBy = UUID.fromString("15d1b0a0-4790-414c-968c-475c86845cc7"),
             sports = mutableListOf(Place.SportKind.BASKETBALL),
-            address = "У дома"
+            address = "У дома",
+            images = listOf()
         )
         placeRepository.save(place)
     }

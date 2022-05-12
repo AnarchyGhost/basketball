@@ -17,5 +17,6 @@ interface CreatePlaceUseCase {
         @RequestParam address: String? = null,
         @RequestParam sports: List<String>,
         @RequestParam createdBy: UUID,
+        @RequestParam images: List<String>
     ): PlaceDto
 }

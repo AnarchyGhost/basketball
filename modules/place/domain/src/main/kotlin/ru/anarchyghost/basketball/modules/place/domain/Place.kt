@@ -72,6 +72,7 @@ data class Place(
             address: String? = null,
             sports: List<SportKind>,
             createdBy: UUID,
+            images: List<UUID>
         ) = Place(
             id = UUID.randomUUID(),
             latitude = latitude,
@@ -86,7 +87,7 @@ data class Place(
             createdAt = Instant.now().toEpochMilli(),
             updatedAt = Instant.now().toEpochMilli(),
             sports = sports,
-            images = mutableListOf()
+            images = images.toMutableList()
         )
     }
 }
