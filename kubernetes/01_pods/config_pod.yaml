@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: config-deployment
+  namespace: helm-deployments
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: config
+  template:
+    metadata:
+      labels:
+        name: config
+    spec:
+      containers:
+        - name: basketball-config-container
+          image: anarchyghost/config
+          ports:
+            - containerPort: 8080
+          env:
+            - name: EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
+              value: "http://eureka-service.helm-deployments:8080/eureka"
+            - name: EUREKA_INSTANCE_PREFERIPADDRESS
+              value: "true"

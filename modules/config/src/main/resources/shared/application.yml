@@ -1,11 +1,12 @@
 app:
   kafka:
-    server: http://localhost:9092
     topics:
       auth:
         codeRequested: auth_code_requested
         codeCreated: auth_code_created
 
 spring:
+  kafka:
+    bootstrap-servers: 146.185.208.133:9092
   autoconfigure:
     exclude: org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration

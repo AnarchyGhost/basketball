@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: review-deployment
+  namespace: helm-deployments
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: review
+  template:
+    metadata:
+      labels:
+        name: review
+    spec:
+      containers:
+        - name: basketball-review-container
+          image: anarchyghost/review
+          ports:
+            - containerPort: 8080
+          env:
+            - name: EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
+              value: "http://eureka-service.helm-deployments:8080/eureka"
+            - name: EUREKA_INSTANCE_PREFERIPADDRESS
+              value: "true"

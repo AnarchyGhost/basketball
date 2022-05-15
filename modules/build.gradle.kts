@@ -1,3 +1,3 @@
 subprojects {
-    group = "ru.energochain.basketball.modules"
+    group = "ru.anarchyghost.basketball.modules"
 }

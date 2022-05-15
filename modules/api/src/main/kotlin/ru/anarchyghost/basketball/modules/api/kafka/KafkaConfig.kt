@@ -17,7 +17,7 @@ import org.springframework.kafka.support.serializer.JsonSerializer
 @EnableKafka
 internal class KafkaConfigSecond {
 
-    @Value("\${app.kafka.server}")
+    @Value("\${spring.kafka.bootstrap-servers}")
     private lateinit var server: String
 
     @Bean

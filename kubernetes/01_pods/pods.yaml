@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: event-deployment
+  namespace: helm-deployments
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: event
+  template:
+    metadata:
+      labels:
+        name: event
+    spec:
+      containers:
+        - name: basketball-event-container
+          image: anarchyghost/event
+          ports:
+            - containerPort: 8080
+          env:
+            - name: EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
+              value: "http://eureka-service.helm-deployments:8080/eureka"
+            - name: EUREKA_INSTANCE_PREFERIPADDRESS
+              value: "true"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: profile-deployment
+  namespace: helm-deployments
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: profile
+  template:
+    metadata:
+      labels:
+        name: profile
+    spec:
+      containers:
+        - name: basketball-profile-container
+          image: anarchyghost/profile
+          ports:
+            - containerPort: 8080
+          env:
+            - name: EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
+              value: "http://eureka-service.helm-deployments:8080/eureka"
+            - name: EUREKA_INSTANCE_PREFERIPADDRESS
+              value: "true"

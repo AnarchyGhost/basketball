@@ -15,6 +15,9 @@ dependencies {
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation(platform("org.springframework.cloud:spring-cloud-dependencies:2021.0.2"))
+    implementation("javax.xml.bind:jaxb-api:2.3.0")
+    implementation("javax.activation:activation:1.1")
+    implementation("org.glassfish.jaxb:jaxb-runtime:2.3.0")
     // Validation
     implementation("javax.validation:validation-api")
 
