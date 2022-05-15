@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: eureka-deployment
+  namespace: helm-deployments
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: eureka
+  template:
+    metadata:
+      labels:
+        name: eureka
+    spec:
+      containers:
+        - name: basketball-eureka-container
+          image: anarchyghost/eureka
+          ports:
+            - containerPort: 8080

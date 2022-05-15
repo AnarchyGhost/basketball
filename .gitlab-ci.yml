@@ -20,6 +20,7 @@ build:
       - modules/*/build/libs/*-boot.jar
   only:
     - stage
+  when: manual
 
 buildDocs:
   image: gradle:7.4.2-jdk11-alpine
@@ -40,7 +41,7 @@ buildDocs:
 
 deployDocs:
   image: ubuntu
-  stage: deployDocs
+  stage: deploy
   before_script:
     - 'command -v ssh-agent >/dev/null || ( apt-get update -y && apt-get install openssh-client -y )'
     - eval $(ssh-agent -s)
@@ -55,8 +56,14 @@ deployDocs:
   when: manual
 
 build images:
-  image: docker
-  stage: deployApp
-  script: "#!/usr/bin/bash for f in modules/*/build/libs/*-boot.jar; do echo \"$f\" docker build --build-arg buildPath=\"$f\" . done"
+  tags:
+    - ubuntu
+  stage: deploy
+  script:
+    - ls -a
+    - |+
+      docker build --build-arg buildPath="anarchyghost" . -t anarchyghost
+  variables:
+    CONTEXT_DIR: .
   only:
     - stage
